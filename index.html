@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naufal Putra Maulana Malik - Portfolio</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/saya4.jpg" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.min.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="light-theme">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar default (tetap di atas di semua mode) */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+
+    /* Saat scroll - light mode */
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navbar dark mode default (tanpa scroll) */
+    body.dark-theme header {
+      background: var(--background-primary, #0f172a);
+      /* mengikuti tema dark */
+      color: #fff;
+    }
+
+    /* Link navbar saat dark mode */
+    body.dark-theme .nav-link {
+      color: #e2e8f0;
+    }
+
+    body.dark-theme .nav-link:hover {
+      color: var(--accent);
+    }
+
+    header,
+    .nav-link {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+
+
+    /* Saat scroll - dark mode */
+    body.dark-theme header.scrolled {
+      background: rgba(15, 23, 42, 0.85);
+      /* warna gelap transparan */
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    body.light-theme .mobile-nav {
+      background-color: #ffffff;
+      /* putih */
+      color: #0f172a;
+    }
+
+    /* Mobile nav saat dark mode */
+    body.dark-theme .mobile-nav {
+      background-color: #0f172a;
+      /* gelap */
+      color: #ffffff;
+    }
+
+    /* Link mobile nav saat dark mode */
+    body.dark-theme .mobile-nav .nav-link {
+      color: #e2e8f0;
+    }
+
+    body.dark-theme .mobile-nav .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 18px;
+      margin-top: 30px;
+      justify-content: start;
+      /* atau center */
+    }
+
+    .social-icons .icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-icons .icon.github {
+      background-color: #333;
+    }
+
+    .social-icons .icon.linkedin {
+      background-color: #0077B5;
+    }
+
+    .social-icons .icon.instagram {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    }
+
+    .social-icons .icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 576px) {
+      .social-icons {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        gap: 12px;
+      }
+
+      .social-icons .icon {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+      }
+    }
+
+    /* Container mobile nav */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0f172a;
+      /* abu gelap elegan */
+      color: #fff;
+      z-index: 999;
+      display: none;
+      /* default hidden */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Tombol tutup */
+    .nav-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* Judul menu */
+    .nav-title {
+      font-size: 20px;
+      margin-bottom: 32px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* Daftar menu */
+    .mobile-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mobile-nav-list .nav-link {
+      font-size: 18px;
+      text-decoration: none;
+      color: #e2e8f0;
+      text-align: center;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+
+    .mobile-nav-list .nav-link:hover {
+      color: #38bdf8;
+      /* biru muda */
+    }
+
+    /* Untuk animasi muncul */
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        width: 50px;
+        height: 50px;
+        margin-right: 6px;
+      }
+
+      .logo-text {
+        font-size: 16px;
+      }
+    }
+
+    .card {
+      width: 220px;
+      height: 320px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 0.1s ease;
+      transform-style: preserve-3d;
+      background: #fff;
+      margin-left: 200px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 130px;
+        height: 200px;
+        margin-top: 20px;
+        margin-left: 80px;
+      }
+    }
+
+    /* Efek animasi scroll + pencahayaan */
+    .about-text {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      display: inline-block;
+    }
+
+    .about-text.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-text span {
+      color: var(--foreground-secondary);
+      transition: color 0.15s ease;
+    }
+
+    .about-text span.active {
+      color: var(--foreground-primary);
+    }
+
+    /* Styling section About */
+    .about-section {
+      background: var(--background-primary);
+      padding: var(--py) 0;
+    }
+
+    .section-title {
+      font-size: var(--fs-1);
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--foreground-primary);
+    }
+
+    .about-section p {
+      font-size: var(--fs-4);
+      max-width: 700px;
+      font-weight: 500;
+      line-height: 1.8;
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .about-content {
+  flex: 1;
+}
+
+    /* Animasi scroll reusable */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-animate.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Tombol Download CV */
+
+    .btn-download-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--accent);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-download-cv::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75px;
+      width: 50px;
+      height: 100%;
+      background: linear-gradient(120deg,
+          rgba(255, 255, 255, 0.4) 0%,
+          rgba(255, 255, 255, 0.1) 60%);
+      transform: skewX(-25deg);
+    }
+
+    .btn-download-cv:hover::before {
+      left: 120%;
+      transition: left 0.6s ease;
+    }
+
+    .btn-download-cv i {
+      font-size: 18px;
+    }
+
+    @media (max-width: 480px) {
+      .nama_logo {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-download-cv {
+        padding: 8px 14px;
+        font-size: 14px;
+        border-radius: 6px;
+      }
+
+      .btn-download-cv i {
+        font-size: 16px;
+      }
+    }
+
+    /* =============================
+   Section Keahlian - Light Mode
+============================= */
+    .skills-section {
+      padding: 60px 20px;
+      text-align: center;
+      background-color: var(--background-primary, #ffffff);
+      color: var(--foreground-primary, #0f172a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Judul */
+    .skills-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--foreground-primary, #0f172a);
+      margin-bottom: 40px;
+    }
+
+    /* Container Skill */
+    .skills-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: auto;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    /* Kolom Skill */
+    .skills-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* Gambar Skill */
+    .skills-column img {
+      width: 50px;
+      height: 50px;
+      margin: auto;
+      filter: brightness(1.2);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .skills-column img:hover {
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 480px) {
+      .skills-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .skills-column {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .skills-column img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .skills-title {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+      }
+    }
+
+    /* Container untuk gambar + teks */
+    .about-container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* Bagian gambar */
+    .about-image {
+      flex: 1;
+      min-width: 280px;
+      text-align: center;
+    }
+
+    .about-image img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Bagian teks */
+    .about-content {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .about-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-content {
+        text-align: center;
+      }
+    }
+
+    /* Dark mode */
+    body.dark-theme .about-image img {
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Container utama */
+    .skills-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* Kolom kiri */
+    .skills-column.left .skill-item {
+      display: flex;
+      flex-direction: row;
+      /* gambar kiri, indikator kanan */
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Kolom kanan */
+    .skills-column.right .skill-item {
+      display: flex;
+      flex-direction: row-reverse;
+      /* gambar kanan, indikator kiri */
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Gambar */
+    .skill-item img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-item img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Indikator */
+    .skill-level {
+      display: flex;
+      gap: 4px;
+    }
+
+    .skill-level span {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      opacity: 0.3;
+      background-color: var(--accent, #38bdf8);
+      transform: scale(0.8);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .skill-level span.empty {
+      background-color: gray;
+      opacity: 0.15;
+    }
+
+    .skill-level span.filled {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+
+    @media (max-width: 480px) {
+      .skills-container {
+        gap: 15px;
+      }
+
+      .skill-item img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .skill-level span {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    .timeline-section {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .header .tab {
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      transition: 0.3s;
+    }
+
+    .header .tab.active {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .icon {
+      font-size: 28px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 40px 0;
+      display: none;
+    }
+
+    .timeline.active-tab {
+      display: block;
+    }
+
+    /* Garis Tengah */
+    .line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: var(--line-color);
+      transform: translateX(-50%);
+      overflow: hidden;
+    }
+
+    .line::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: var(--line-progress, 0%);
+      background-color: var(--accent);
+      transition: height 0.2s linear;
+    }
+
+    /* Lingkaran / Titik Timeline */
+    .circle {
+      position: absolute;
+      top: 20px;
+      width: 18px;
+      height: 18px;
+      background: var(--line-color);
+      border-radius: 50%;
+      z-index: 2;
+      transition: background 0.3s;
+    }
+
+    .timeline-item.active .circle {
+      background: var(--accent);
+    }
+
+    /* Posisi Lingkaran Kiri/Kanan */
+    .timeline-item.left .circle {
+      right: -9px;
+    }
+
+    .timeline-item.right .circle {
+      left: -9px;
+    }
+
+    /* Posisi Card */
+    .timeline-item {
+      width: 50%;
+      padding: 20px;
+      position: relative;
+    }
+
+    .timeline-item.left {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item.right {
+      left: 50%;
+      text-align: left;
+    }
+
+    /* Card Style */
+    .timeline-item .content {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.6s ease;
+    }
+
+    .timeline-item.active .content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Light Theme */
+    body.light-theme {
+      --accent: #6c63ff;
+      --line-color: #ccc;
+      --text-muted: #888;
+      --card-bg: #fff;
+      --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Dark Theme */
+    body.dark-theme {
+      --accent: #9b8cff;
+      --line-color: #555;
+      --text-muted: #aaa;
+      --card-bg: #1e293b;
+      --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      color: #e2e8f0;
+      background: var(--background-primary, #0f172a);
+    }
+
+    @media (max-width: 480px) {
+      .timeline-section {
+        padding: 2px;
+      }
+
+      .timeline-item {
+        width: 50%;
+      }
+
+      .timeline-item .content {
+        font-size: 0.9rem;
+        padding: 15px;
+      }
+
+      .header {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .header .tab {
+        font-size: 1.3rem;
+      }
+
+      .header .tab i.icon {
+        font-size: 1.1rem;
+      }
+
+    }
+
+    /* Style umum */
+    .nav-close-btn ion-icon {
+      font-size: 28px;
+      transition: color 0.3s ease;
+    }
+
+    /* Light mode */
+    body.light-theme .nav-close-btn ion-icon {
+      color: #0f172a;
+    }
+
+    /* Dark mode */
+    body.dark-theme .nav-close-btn ion-icon {
+      color: #f1f5f9;
+    }
+
+    /* Light mode */
+    body.light-theme .mobile-nav-list .nav-link {
+      color: #0f172a;
+    }
+
+    body.light-theme .mobile-nav-list .nav-link:hover {
+      color: var(--accent, #6c63ff);
+    }
+
+    /* Dark mode */
+    body.dark-theme .mobile-nav-list .nav-link {
+      color: #f1f5f9;
+    }
+
+    .portfolio-section {
+      margin-top: 3rem;
+    }
+
+    .portfolio-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--foreground-primary);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ==== Card Wrapper ==== */
+    .portfolio-card {
+      position: relative;
+      background: var(--background-primary);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ==== Neon Animated Border ==== */
+    .portfolio-card .animated-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .portfolio-card .animated-border rect {
+      fill: none;
+      stroke: url(#grad);
+      stroke-width: 3px;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 0;
+      animation: dashmove 8s linear infinite;
+      rx: 16;
+      ry: 16;
+    }
+
+    .dark-theme .portfolio-card .animated-border rect {
+      stroke: url(#gradDark);
+    }
+
+
+    /* Dark mode gradient tweak */
+    .dark-theme .portfolio-card .animated-border rect {
+      stroke: url(#gradDark);
+    }
+
+    @keyframes dashmove {
+      to {
+        stroke-dashoffset: -2000;
+      }
+    }
+
+    /* ==== Image ==== */
+    .portfolio-img img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    /* ==== Content ==== */
+    .portfolio-content h3 {
+      font-size: 1.2rem;
+      color: var(--foreground-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-content p {
+      font-size: 0.9rem;
+      color: var(--foreground-secondary);
+    }
+
+    /* ==== Tags ==== */
+    .portfolio-tags {
+      margin-top: 0.75rem;
+    }
+
+    .portfolio-tags .tag {
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-right: 5px;
+    }
+
+    /* ==== Responsive ==== */
+    @media (max-width: 480px) {
+      .portfolio-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .kontak-section {
+      display: flex;
+      justify-content: center;
+      margin: 50px auto;
+    }
+
+    .kontak-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #4f6df5;
+      border-radius: 20px;
+      padding: 40px;
+      gap: 20px;
+      color: white;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .kontak-text h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .kontak-text p {
+      margin-bottom: 20px;
+    }
+
+    .kontak-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: #4f6df5;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .kontak-btn:hover {
+      background: #e9ecff;
+    }
+
+    .kontak-img img {
+      max-width: 200px;
+      height: auto;
+    }
+
+    /* Dark mode */
+    body.dark-theme .kontak-card {
+      background: #222;
+    }
+
+    body.dark-theme .kontak-btn {
+      background: #4f6df5;
+      color: white;
+    }
+
+    body.dark-theme .kontak-btn:hover {
+      background: #6f85ff;
+    }
+
+   @media (max-width: 480px) {
+  .kontak-card {
+    padding: 15px;
+    gap: 15px;
+    margin: 10px;
+  }
+
+  .kontak-text h2 {
+    font-size: 1.2rem; 
+  }
+
+  .kontak-text p {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+
+  .kontak-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    gap: 5px;
+    border-radius: 8px;
+  }
+
+  .kontak-btn i {
+    font-size: 0.9rem; 
+  }
+
+  .kontak-img img {
+    max-width: 120px; 
+  }
+}
+  </style>
+
+  <!--
+    - #HEADER
+  -->
+
+  <header>
+
+    <div class="container">
+
+      <nav class="navbar">
+
+        <a href="#" class="nama_logo" style="font-family: 900; color: var(--foreground-primary);">
+          <h1>Portfolio</h1>
+        </a>
+
+        <div class="btn-group">
+
+          <button class="theme-btn theme-btn-mobile light">
+            <ion-icon name="moon" class="moon"></ion-icon>
+            <ion-icon name="sunny" class="sun"></ion-icon>
+          </button>
+
+          <button class="nav-menu-btn">
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <div class="flex-wrapper">
+
+          <ul class="desktop-nav">
+
+            <li>
+              <a href="#beranda" class="nav-link">Beranda</a>
+            </li>
+
+            <li>
+              <a href="#about" class="nav-link">Tentang Saya</a>
+            </li>
+
+            <li>
+              <a href="#keahlian" class="nav-link">Keahlian</a>
+            </li>
+
+            <li>
+              <a href="#pendidikan" class="nav-link">Pendidikan</a>
+            </li>
+
+            <li>
+              <a href="#portfolio" class="nav-link">Portfolio</a>
+            </li>
+
+            <li>
+              <a href="#kontak" class="nav-link">Kontak</a>
+            </li>
+
+          </ul>
+
+          <button class="theme-btn theme-btn-desktop light">
+            <ion-icon name="moon" class="moon"></ion-icon>
+            <ion-icon name="sunny" class="sun"></ion-icon>
+          </button>
+
+        </div>
+
+        <div class="mobile-nav">
+
+          <button class="nav-close-btn">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <div class="wrapper">
+            <p class="h3 nav-title">Menu Utama</p>
+
+            <ul class="mobile-nav-list">
+              <li><a href="#beranda" class="nav-link">Beranda</a></li>
+              <li><a href="#about" class="nav-link">Tentang Saya</a></li>
+              <li><a href="#keahlian" class="nav-link">Keahlian</a></li>
+              <li><a href="#pendidikan" class="nav-link">Pendidikan</a></li>
+              <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+              <li><a href="#kontak" class="nav-link">Kontak</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+  <main>
+
+    <!--
+      - #HERO SECTION
+    -->
+
+    <section id="beranda" class="beranda-section">
+      <div class="hero">
+
+        <div class="container">
+
+          <div class="left">
+
+            <h1 class="h1">
+              Saya <b>Naufal&nbsp;Putra</b><br>
+              <span id="typed-text"></span>
+            </h1>
+
+            <p class="h3">
+              Mahasiswa Di <abbr title="Accessibility">Politeknik Enjinering Indorama</abbr>
+              Antusias Pada Teknologi
+            </p>
+
+            <div class="social-icons">
+              <a href="https://github.com/NaufalP024" class="icon github" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://linkedin.com/in/naufal-putra-maulana-malik" class="icon linkedin" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://instagram.com/nauflptr_" class="icon instagram" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+
+
+          </div>
+
+          <div class="card">
+            <img src="assets/images/saya1.jpg" alt="">
+          </div>
+
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="container about-container">
+
+        <!-- Gambar -->
+        <div class="about-image scroll-animate">
+          <img src="assets/images/saya2.jpg" style="height: 400px;" alt="Foto Naufal Putra">
+        </div>
+
+        <!-- Teks -->
+        <div class="about-content">
+          <h2 class="section-title scroll-animate">Tentang Saya</h2>
+          <p class="about-text scroll-animate">
+  Halo👋, Saya adalah mahasiswa Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL) di Politeknik Enjinering Indorama
+  yang memiliki minat besar dalam dunia teknologi, khususnya di bidang cloud computing, web development, dan UI/UX design.
+  Ketertarikan saya terhadap bidang ini berawal dari rasa ingin tahu yang tinggi terhadap bagaimana teknologi dapat mempermudah
+  kehidupan sehari-hari dan mendorong efisiensi dalam berbagai sektor. Saya juga sangat antusias dalam mengikuti perkembangan
+  teknologi terbaru dan terus berupaya mengembangkan kemampuan saya melalui proyek, kolaborasi, serta pembelajaran mandiri.
+  Bagi saya, menjadi seorang software engineer bukan hanya soal menulis kode, tetapi juga tentang menciptakan solusi yang
+  berdampak dan relevan dengan kebutuhan masyarakat modern.
+</p>
+
+          <!-- Tombol Download CV -->
+          <div class="cv-button-wrapper scroll-animate">
+            <a href="assets/images/CV-Naufal Putra Maulana Malik.pdf" download class="btn-download-cv">
+              <i class="fas fa-download"></i> Download CV
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="skills-section" id="keahlian">
+      <h2 class="skills-title">Keahlian</h2>
+      <div class="skills-container">
+        <!-- Kolom kiri -->
+        <div class="skills-column left">
+          <div class="skill-item">
+            <img src="assets/images/html.png" alt="HTML" />
+            <div class="skill-level">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="skill-item">
+            <img src="assets/images/figma.jpeg" alt="Figma" />
+            <div class="skill-level">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="skill-item">
+            <img src="assets/images/bootstrap.png" alt="Bootstrap" />
+            <div class="skill-level">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="skill-item">
+            <img src="assets/images/laravel.jpeg" alt="Laravel" />
+            <div class="skill-level">
+              <span></span><span></span><span></span><span></span><span class="empty"></span>
+            </div>
+          </div>
+          <div class="skill-item">
+            <img src="assets/images/linux.png" alt="Linux" />
+            <div class="skill-level">
+              <span></span><span></span><span></span><span></span><span class="empty"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom kanan -->
+        <div class="skills-column right">
+          <div class="skill-item">
+            <div class="skill-level left">
+              <span></span><span></span><span></span><span></span><span class="empty"></span>
+            </div>
+            <img src="assets/images/css.png" alt="CSS" />
+          </div>
+          <div class="skill-item">
+            <div class="skill-level left">
+              <span></span><span></span><span></span><span class="empty"></span><span class="empty"></span>
+            </div>
+            <img src="assets/images/js.jpeg" alt="JavaScript" />
+          </div>
+          <div class="skill-item">
+            <div class="skill-level left">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <img src="assets/images/git.png" alt="Git" />
+          </div>
+          <div class="skill-item">
+            <div class="skill-level left">
+              <span></span><span></span><span></span><span></span><span class="empty"></span>
+            </div>
+            <img src="assets/images/microsoft.png" alt="Microsoft" />
+          </div>
+          <div class="skill-item">
+            <div class="skill-level left">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <img src="assets/images/canva.jpeg" alt="Canva" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="timeline-section" id="pendidikan">
+      <div class="header">
+        <h2 class="tab active" data-tab="education">
+          <i class="fa-solid fa-graduation-cap icon"></i> Edukasi
+        </h2>
+        <h2 class="tab" data-tab="achievement">
+          <i class="fa-solid fa-briefcase icon"></i> Pekerjaan
+        </h2>
+      </div>
+
+      <div class="timeline-container">
+        <!-- EDUKASI -->
+        <div class="timeline education-tab active-tab">
+          <div class="line"></div>
+
+          <div class="timeline-item left">
+            <div class="circle"></div>
+            <div class="content">
+              <h3 style="color: var(--accent) ;">Teknologi Rekayasa Perangkat Lunak</h3>
+              <p style="font-weight: 600;">Politeknik Enjinering Indorama</p>
+              <span>
+                <i class="fa-solid fa-calendar-days"></i> 2023 - Sekarang
+              </span>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="circle"></div>
+            <div class="content">
+              <h3 style="color: var(--accent) ;">Matematika & Ipa</h3>
+              <p style="font-weight: 600;">SMAN 1 Bungursari</p>
+              <span>
+                <i class="fa-solid fa-calendar-days"></i> 2020 - 2023
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pekerjaan -->
+        <div class="timeline achievement-tab">
+          <div class="line"></div>
+
+          <div class="timeline-item right">
+            <div class="circle"></div>
+            <div class="content">
+              <h3 style="color: var(--accent) ;">Sosial Media Marketing</h3>
+              <p style="font-weight: 600;">Ruang Coding Indonesia</p>
+              <span> <i class="fa-solid fa-calendar-days"></i> Maret 2025</span>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="circle"></div>
+            <div class="content">
+              <h3 style="color: var(--accent) ;">Freelance Design</h3>
+              <p style="font-weight: 600;">Platform Fiverr</p>
+              <span> <i class="fa-solid fa-calendar-days"></i> Juni 2025 - Sekarang</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-section container" id="portfolio">
+      <h2 class="h2 portfolio-title" style="font-size: var(--fs-1);">Portfolio</h2>
+
+      <div class="portfolio-grid">
+
+        <!-- CARD 1 -->
+        <div class="portfolio-card">
+          <!-- SVG Border -->
+          <svg class="animated-border" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7f5af0" />
+                <stop offset="100%" stop-color="#00b4d8" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="16" ry="16" />
+          </svg>
+
+          <div class="portfolio-img">
+            <img src="assets/images/sertif.jpg" alt="Sertif">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="h3">Juara 3 Nasional Sepak Bola</h3>
+            <p>Pada tahun 2020, saya berhasil meraih tiga gelar juara nasional turnamen sepak bola junior. Kemenangan
+              ini bukan sekadar medali, melainkan hasil dari latihan keras, kerja sama tim, dan semangat pantang
+              menyerah yang saya pelajari selama proses tersebut.</p>
+            <div class="portfolio-tags">
+              <span class="tag">Olahraga</span>
+              <span class="tag">Sepak Bola</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="portfolio-card">
+          <svg class="animated-border" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7f5af0" />
+                <stop offset="100%" stop-color="#00b4d8" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="16" ry="16" />
+          </svg>
+
+          <div class="portfolio-img">
+            <img src="assets/images/linka.png" alt="Linka">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="h3">Linka Store</h3>
+            <p>Website Linka UMKM telah dipublikasikan menggunakan HTML, CSS, dan Alpine.js dengan dukungan PWA.
+              Platform ini menjadi sarana digitalisasi dan promosi usaha ke ranah online.</p>
+            <div class="portfolio-tags">
+              <span class="tag">UI Design</span>
+              <span class="tag">Frontend Dev</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="portfolio-card">
+          <svg class="animated-border" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7f5af0" />
+                <stop offset="100%" stop-color="#00b4d8" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="16" ry="16" />
+          </svg>
+
+          <div class="portfolio-img">
+            <img src="assets/images/blasteran.png" alt="Blasteran">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="h3">
+              Blasteran Car Wash
+            </h3>
+            <p>Website operasional untuk usaha cuci mobil Blasteran dibuat menggunakan PHP Native. Situs ini dirancang
+              untuk mempermudah pencatatan layanan, manajemen pelanggan, dan data operasional harian agar pekerjaan
+              lebih terstruktur.</p>
+            <div class="portfolio-tags">
+              <span class="tag">PHP</span>
+              <span class="tag">Web Development</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="portfolio-card">
+          <svg class="animated-border" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7f5af0" />
+                <stop offset="100%" stop-color="#00b4d8" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="16" ry="16" />
+          </svg>
+
+          <div class="portfolio-img">
+            <img src="assets/images/addem.png" alt="Addem">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="h3">
+              Addem Muslim
+            </h3>
+            <p>Website penjualan produk busana muslim UMKM Addem Store dibuat menggunakan Filament Laravel. Terintegrasi
+              dengan Midtrans untuk pembayaran dan Biteship API untuk deteksi lokasi, pelacakan pengiriman, serta
+              perhitungan ongkir otomatis.</p>
+            <div class="portfolio-tags">
+              <span class="tag">Laravel</span>
+              <span class="tag">Web Development</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="portfolio-card">
+          <svg class="animated-border" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7f5af0" />
+                <stop offset="100%" stop-color="#00b4d8" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="16" ry="16" />
+          </svg>
+
+          <div class="portfolio-img">
+            <img src="assets/images/ppdb.png" alt="PPDB">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="h3">
+              Website PPDB Sekolah Dasar
+            </h3>
+            <p>Website PPDB untuk sekolah dasar ini dibuat menggunakan PHP Native dan dilengkapi salah satu fitur backup
+              database langsung melalui antarmuka website untuk menjaga keamanan data pendaftaran.</p>
+            <div class="portfolio-tags">
+              <span class="tag">PHP</span>
+              <span class="tag">Web Development</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="portfolio-card">
+          <svg class="animated-border" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7f5af0" />
+                <stop offset="100%" stop-color="#00b4d8" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="16" ry="16" />
+          </svg>
+
+          <div class="portfolio-img">
+            <img src="assets/images/desain produk.png" alt="Desain">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="h3">
+              Desain Produk
+            </h3>
+            <p>Telah membuat desain produk untuk memasarkan source code website melalui akun Instagram Ruang Coding.
+              Desain difokuskan pada visual yang menarik dan informatif guna meningkatkan minat beli serta memperluas
+              jangkauan audiens secara digital.</p>
+            <div class="portfolio-tags">
+              <span class="tag">Desain</span>
+              <span class="tag">Instagram Marketing</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="kontak-section" id="kontak">
+      <div class="kontak-card">
+        <div class="kontak-text">
+          <h2>Mau diskusi dengan saya?</h2>
+          <p>Hubungi saya sekarang!</p>
+          <a href="https://wa.me/6281388077798" target="_blank" class="kontak-btn">
+            Hubungi Saya <i class="fa-solid fa-paper-plane"></i>
+          </a>
+        </div>
+        <div class="kontak-img">
+          <img src="assets/images/kontak.png" alt="Ilustrasi Kontak">
+        </div>
+      </div>
+    </section>
+
+
+    <!--
+    - #FOOTER
+  -->
+
+    <footer>
+      <p class="copyright">
+        &copy; Copyright 2025 <a href="#">Naufal Putra</a>
+      </p>
+
+    </footer>
+
+
+
+
+
+    <!--
+    - custom js link
+  -->
+    <script src="./assets/js/script.min.js"></script>
+
+    <!--
+    - ionicon link
+  -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <script>
+      var typed = new Typed("#typed-text", {
+        strings: ["Web Developer", "Cloud Computing", "UI/UX Design"],
+        typeSpeed: 70,
+        backSpeed: 50,
+        backDelay: 1500,
+        loop: true,
+        smartBackspace: true
+      });
+    </script>
+
+    <script>
+      // Aktifkan nav
+      document.querySelector('.nav-toggle-btn')?.addEventListener('click', () => {
+        document.querySelector('.mobile-nav').classList.add('active');
+      });
+
+      // Tutup nav
+      document.querySelector('.nav-close-btn')?.addEventListener('click', () => {
+        document.querySelector('.mobile-nav').classList.remove('active');
+      });
+    </script>
+
+
+    <script>
+      const card = document.querySelector('.card');
+
+      card.addEventListener('mousemove', (e) => {
+        let rect = card.getBoundingClientRect();
+        let x = e.clientX - rect.left; // posisi X mouse di dalam card
+        let y = e.clientY - rect.top;  // posisi Y mouse di dalam card
+
+        let centerX = rect.width / 2;
+        let centerY = rect.height / 2;
+
+        let rotateX = ((y - centerY) / centerY) * 15; // max 10 derajat
+        let rotateY = ((x - centerX) / centerX) * 15;
+
+        card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `rotateX(0deg) rotateY(0deg)`; // kembali normal
+      });
+    </script>
+
+    <script>
+      const aboutTexts = document.querySelectorAll('.about-text');
+
+      aboutTexts.forEach(textEl => {
+        const originalText = textEl.textContent.trim();
+        textEl.textContent = "";
+
+        // Pisahkan teks berdasarkan spasi (per kata)
+        originalText.split(" ").forEach(word => {
+          const wordSpan = document.createElement("span");
+          wordSpan.style.whiteSpace = "nowrap"; // biar huruf di kata ini tetap utuh
+
+          // Pecah kata jadi huruf
+          Array.from(word).forEach(char => {
+            const charSpan = document.createElement("span");
+            charSpan.textContent = char;
+            wordSpan.appendChild(charSpan);
+          });
+
+          textEl.appendChild(wordSpan);
+
+          // Tambahkan spasi antar kata
+          textEl.appendChild(document.createTextNode(" "));
+        });
+      });
+
+      function handleScroll() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        aboutTexts.forEach(textEl => {
+          const rect = textEl.getBoundingClientRect();
+          const spans = textEl.querySelectorAll("span span"); // ambil hurufnya saja
+
+          if (rect.top < triggerBottom && rect.bottom > 0) {
+            textEl.classList.add("show");
+            spans.forEach((span, index) => {
+              setTimeout(() => {
+                span.classList.add("active");
+              }, index * 10);
+            });
+          } else {
+            textEl.classList.remove("show");
+            spans.forEach(span => span.classList.remove("active"));
+          }
+        });
+      }
+
+      window.addEventListener("scroll", handleScroll);
+      handleScroll();
+
+    </script>
+
+    <script>
+      // Ambil semua elemen yang mau dianimasi saat scroll
+      const scrollElements = document.querySelectorAll('.scroll-animate');
+
+      function handleScroll() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        scrollElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < triggerBottom && rect.bottom > 0) {
+            el.classList.add('show');
+          } else {
+            el.classList.remove('show'); // biar bisa animasi berulang
+          }
+        });
+      }
+
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+
+    </script>
+
+    <script>
+      const header = document.querySelector("header");
+      const main = document.querySelector("main");
+
+      // Biar konten nggak ketiban navbar
+      function adjustContentMargin() {
+        main.style.marginTop = header.offsetHeight + "px";
+      }
+      adjustContentMargin();
+      window.addEventListener("resize", adjustContentMargin);
+
+      // Efek saat scroll
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+    </script>
+
+    <script>
+      function animateSkillsOnScroll() {
+        const skillLevels = document.querySelectorAll('.skill-level');
+
+        skillLevels.forEach(level => {
+          const rect = level.getBoundingClientRect();
+          const triggerPoint = window.innerHeight * 0.85;
+
+          // Jika masuk layar
+          if (rect.top < triggerPoint && rect.bottom > 0) {
+            const spans = level.querySelectorAll('span:not(.empty)');
+            spans.forEach((span, index) => {
+              setTimeout(() => {
+                span.classList.add('filled');
+              }, index * 120);
+            });
+          }
+          // Jika keluar layar → reset animasi biar bisa diulang
+          else {
+            level.querySelectorAll('span:not(.empty)').forEach(span => {
+              span.classList.remove('filled');
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', animateSkillsOnScroll);
+      window.addEventListener('load', animateSkillsOnScroll);
+
+    </script>
+
+    <script>
+      const tabs = document.querySelectorAll('.tab');
+      const timelines = document.querySelectorAll('.timeline');
+
+      // Tab Switching
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          const selected = tab.dataset.tab;
+          timelines.forEach(timeline => {
+            timeline.classList.remove('active-tab');
+            if (timeline.classList.contains(`${selected}-tab`)) {
+              timeline.classList.add('active-tab');
+            }
+          });
+          updateTimeline();
+        });
+      });
+
+      // Scroll Animation
+      function updateTimeline() {
+        document.querySelectorAll('.timeline.active-tab').forEach(activeTimeline => {
+          const line = activeTimeline.querySelector('.line');
+          const items = activeTimeline.querySelectorAll('.timeline-item');
+          const sectionTop = activeTimeline.getBoundingClientRect().top + window.scrollY;
+          const sectionHeight = activeTimeline.offsetHeight;
+          const scrollY = window.scrollY + window.innerHeight;
+
+          let progress = Math.min((scrollY - sectionTop) / sectionHeight, 1);
+          line.style.setProperty('--line-progress', `${progress * 100}%`);
+
+          items.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          });
+        });
+      }
+
+      window.addEventListener('scroll', updateTimeline);
+      window.addEventListener('load', updateTimeline);
+
+    </script>
+
+
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <!-- Light Mode Gradient -->
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#7f5af0" />
+          <stop offset="100%" stop-color="#00b4d8" />
+        </linearGradient>
+
+        <!-- Dark Mode Gradient -->
+        <linearGradient id="gradDark" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#c77dff" />
+          <stop offset="100%" stop-color="#00f5d4" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+</body>
+
+</html>
